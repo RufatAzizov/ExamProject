@@ -3,17 +3,23 @@
 @{
 }
 
-<form>
+<form method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="Name">Name</label>
-        <input asp-for="Name" class="form-control" id="Name" placeholder="Enter Name">
+        <input asp-for="Name" class="form-control" id="Name" placeholder="Change Name">
         <span asp-validation-for="Name" class="form-text text-danger">Write name correctly</span>
     </div>
+    
     <div class="form-group">
         <label asp-for="About">Name</label>
-        <input asp-for="About" class="form-control" id="About" placeholder="Enter description about a fruit">
+        <input asp-for="About" class="form-control" id="About" placeholder="Change description about a fruit">
         <span asp-validation-for="About" class="form-text text-danger">Write description correctly</span>
     </div>
-    <button type="submit" class="btn btn-success">Submit</button>
+    <div class="form-group">
+        <label asp-for="FileImage">Image</label>
+        <input asp-for="FileImage" class="form-control" id="FileImage" placeholder="Change image">
+        <span asp-validation-for="About" class="form-text text-danger">Write description correctly</span>
+    </div>
+    <button type="Update" class="btn btn-outline-warning">Update</button>
     <button type="submit" asp-action="Cancel" class="btn btn-danger">Cancel</button>
 </form>

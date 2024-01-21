@@ -96,13 +96,12 @@ namespace Exam.Areas.Admin.Controllers
             }
             var data = await _db.Fruits.FindAsync(id);
             if (data == null) return NotFound();
-            data.ImageUrl = vm.ImageUrl;
             data.About = vm.About;
             data.Id = vm.Id;
             data.Name = vm.Name;
 
 
-            string filepath = Path.Combine(_environment.WebRootPath, "Assets", "images", "stories", data.ImageUrl);
+            string filepath = Path.Combine(_environment.WebRootPath, "Assets", "CreatedImages", data.ImageUrl);
             if (System.IO.File.Exists(filepath))
             {
                 System.IO.File.Delete(filepath);

@@ -1,8 +1,5 @@
-﻿@* @model Exam.ViewModels.FruitListItemVM; *@
-
-@{
+﻿@{
     ViewData["Title"] = "Admin Page";
-
 }
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -34,7 +31,7 @@
                             <tr>
                                 <td>@item.Name </td>
                                 <td>@item.About</td>
-                                <td><img src="@item.ImageUrl" /> </td>
+                                <td width="13%"><img style="width:90%" src="~/assets/CreatedImages/@item.ImageUrl"/> </td>
                                 <td>
                                     <a asp-action="Update" asp-controller="Fruits" class="btn btn-warning">Update</a>
                                 </td>

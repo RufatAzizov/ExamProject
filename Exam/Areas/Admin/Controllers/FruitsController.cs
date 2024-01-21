@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Exam.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+
     public class FruitsController : Controller
     {
         DataDbContext _db { get; set; }
@@ -17,7 +19,6 @@ namespace Exam.Areas.Admin.Controllers
             _environment = environment;
         }
 
-        [Area("Admin")]
 
         public async Task<IActionResult> Index()
         {
@@ -35,6 +36,11 @@ namespace Exam.Areas.Admin.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> LogOut()
+        {
+            return RedirectToAction("Index", "Home");
+        }
         public async Task<IActionResult> Cancel()
         {
             return RedirectToAction("Index");
@@ -47,7 +53,7 @@ namespace Exam.Areas.Admin.Controllers
                 return View(vm);
             }
             string filename = null;
-            if (vm.FileImage == null) 
+            if (vm.FileImage != null) 
             {
                 filename = Guid.NewGuid() + Path.GetExtension(vm.FileImage.FileName);
                 using (Stream fs = new FileStream(Path.Combine(_environment.WebRootPath, "assets", "CreatedImages", filename), FileMode.Create))
@@ -55,7 +61,13 @@ namespace Exam.Areas.Admin.Controllers
                     await vm.FileImage.CopyToAsync(fs);
                 };   
             }
-            await _db.Fruits.AddAsync((Fruit)vm.FileImage);
+            Fruit fruit = new Fruit
+            {
+                Name = vm.Name,
+                About = vm.About,
+                ImageUrl = filename
+            };
+            await _db.Fruits.AddAsync(fruit);
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

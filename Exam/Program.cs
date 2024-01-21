@@ -25,6 +25,7 @@ namespace Exam
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllerRoute(
             name: "Admin",

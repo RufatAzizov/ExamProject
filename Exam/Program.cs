@@ -1,3 +1,6 @@
+using Exam.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace Exam
 {
     public class Program
@@ -8,6 +11,8 @@ namespace Exam
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<DataDbContext>(
+       options => options.UseSqlServer(builder.Configuration.GetConnectionString("MSSql")));
 
             var app = builder.Build();
 
@@ -21,7 +26,10 @@ namespace Exam
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.MapControllerRoute(
+            name: "Admin",
+            pattern: "{area:exists}/{controller=Fruits}/{action=Index}/{id?}"
+          );
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

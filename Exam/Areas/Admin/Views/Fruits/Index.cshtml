@@ -33,10 +33,10 @@
                                 <td>@item.About</td>
                                 <td width="13%"><img style="width:90%" src="~/assets/CreatedImages/@item.ImageUrl"/> </td>
                                 <td>
-                                    <a asp-action="Update" asp-controller="Fruits" class="btn btn-warning">Update</a>
+                                    <a asp-action="Update" asp-controller="Fruits" asp-route-id="@item.Id" class=" btn btn-warning">Update</a>
                                 </td>
                                 <td>
-                                    <a asp-action="Delete" asp-controller="Fruits" class="btn btn-danger">Delete</a>
+                                    <a asp-action="Delete" asp-controller="Fruits" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                                 </td>
                                 
                                 

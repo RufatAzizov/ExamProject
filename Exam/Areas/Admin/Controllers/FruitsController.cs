@@ -75,7 +75,7 @@ namespace Exam.Areas.Admin.Controllers
         public async Task<IActionResult> Update(int? id)
         {
             if (id == null) return BadRequest();
-            var data = await _db.Fruits.FindAsync();
+            var data = await _db.Fruits.FindAsync(id);
             if (data == null) return NotFound();
             return View(new FruitUpdateVM
             {
@@ -94,7 +94,7 @@ namespace Exam.Areas.Admin.Controllers
             {
                 return View(vm);
             }
-            var data = await _db.Fruits.FindAsync();
+            var data = await _db.Fruits.FindAsync(id);
             if (data == null) return NotFound();
             data.ImageUrl = vm.ImageUrl;
             data.About = vm.About;
@@ -125,8 +125,9 @@ namespace Exam.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return BadRequest();
-            var data = await _db.Fruits.FindAsync();
+            var data = await _db.Fruits.FindAsync(id);
             if (data == null) return NotFound();
+            _db.Remove(data);   
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
 
